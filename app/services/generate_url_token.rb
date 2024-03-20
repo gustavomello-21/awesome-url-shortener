@@ -1,8 +1,9 @@
-require 'securerandom'
+require 'digest'
 
 class GenerateUrlToken
   def generate_token(url)
-    token = SecureRandom.hex(4) + DateTime.now.strftime("%Y%m%d%H%M%S") + url[0..2]
-    token
+    token_input = "#{url}#{Time.now.to_i}#{rand}"
+    token = Digest::SHA256.hexdigest(token_input)
+    token[0..5]
   end
 end

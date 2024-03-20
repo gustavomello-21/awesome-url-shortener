@@ -5,10 +5,22 @@ class UrlsController < ApplicationController
   def generate_short_url
     url_params = {
       url: params[:url],
-      token: Services::GenerateUrlToken.new.generate_token(params[:url])
+      token: GenerateUrlToken.new.generate_token(params[:url])
     }
 
-    Url.create(url_params)
+    url = Url.create(url_params)
+
+    render json: { url: "http://localhost:3000/#{url.token}" }, status: :created
+  end
+
+  def redirect_to_original_url
+    url = Url.find_by(token: params[:token])
+
+    if url
+      render json: { url: url.url }, status: :ok
+    else
+      render json: {message: "Url não encontrada" }, status: :not_found
+    end
   end
 
   def load_params
