@@ -12,7 +12,7 @@ Welcome to the Awesome URL Shortener! This is a fun project where you can shorte
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/awesome-url-shortener.git
+   git clone https://github.com/gustavomello-21/awesome-url-shortener.git
    ```
 2. Navigate into the project directory:
    ```bash
